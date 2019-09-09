@@ -106,7 +106,6 @@ $("#bt1").click(function () {
                         alert("账号或密码错误")
                     }
                     else if(result.status){
-                        
                         document.cookie ="token="+ result.token;
                         alert("登录成功！");
                         window.location.href="http://101.132.116.167:3000";

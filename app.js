@@ -69,8 +69,9 @@ app.get('/user-info', Router.userInfo)
 app.post('/friend-info', Router.friendInfo)
 app.post('/upload-info', Router.uploadInfo)
 app.post('/upload-img', upload.single('user'), Router.uploadImg)
-app.post('/Img',upload.single('img'),Router.Img);
+app.post('/img',upload.single('img'),Router.Img);
 app.post('/friend',Router.Friend)
+app.post('/history', Router.History)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

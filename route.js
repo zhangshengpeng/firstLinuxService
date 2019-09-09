@@ -115,6 +115,13 @@ exports.saveMsg = (str)=> {
 			}
 		})
 }
+exports.History = (req, res)=> {
+	var sql = "SELECT * FROM message WHERE (say = '"+req.body.userId+"'AND  _to = '"+req.body.friendId+"') or (say = '"+req.body.friendId+"'AND  _to = '"+req.body.userId+"')"
+	connection.query(sql,function(err,result){
+		if (err) { console.log(err) }
+		else{ res.send(result) }
+	})
+}
 exports.uploadInfo = (req, res) => {
 	token = req.cookies.token;
 	jwt.verify(token,cert,function(err,decoded){
