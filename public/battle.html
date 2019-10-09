@@ -97,7 +97,7 @@
 $("#bt1").click(function () {
     $.ajax({  
             type: "POST",   //提交的方法
-            url:"http://101.132.116.167/login", //提交的地址 
+            url:"/login", //提交的地址 
             data:$('#fm1').serialize(),// 序列化表单值  
             async: false,  
             success: function (result) {
