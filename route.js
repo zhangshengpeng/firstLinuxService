@@ -49,8 +49,8 @@ exports.Login = (req, res)=> {
 }
 
 exports.Insert = (req, res)=> {
-	let  add = 'INSERT INTO userbaseinfo(id,password) VALUES(?,?)';
-	let  Params = [req.body.id,req.body.password];
+	let  add = 'INSERT INTO userbaseinfo(name,id,password) VALUES(?,?,?)';
+	let  Params = [req.body.id,req.body.id,req.body.password];
 	let sql = "SELECT id FROM userbaseinfo WHERE id = '"+req.body.id+"'";
 
 	connection.query(sql, (err, result)=>{
