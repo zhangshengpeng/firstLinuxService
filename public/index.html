@@ -99,9 +99,9 @@ $("#bt1").click(function () {
             type: "POST",   //提交的方法
             url:"/login", //提交的地址 
             data:$('#fm1').serialize(),// 序列化表单值  
-            async: false,  
+            async: false,
             success: function (result) {
-                    console.log(result.token);//打印服务端返回的数据(调试用)
+                    console.log(result);//打印服务端返回的数据(调试用)
                     if (result.status=="0") {
                         alert("账号或密码错误")
                     }
