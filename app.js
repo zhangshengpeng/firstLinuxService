@@ -18,6 +18,7 @@ let token
 
 var id 
 var arrAllSocket = []
+let houseList = []
 
 //图片存储
 var storage = multer.diskStorage({
@@ -36,6 +37,73 @@ io.on('connection',function(socket){
     arrAllSocket[id] = socket.id
     console.log("online:",arrAllSocket)
   })
+  //创建房间
+  socket.on('createHousr',(data)=>{
+    let params = {
+      houseId: '',
+      type: data.type,
+      user: []
+    }
+    for(let i=0;i<houseList.length;i++) {
+      if(houseList[i]!=i) {
+        params.id = '00'+i;
+        let user = {
+          id: data.userId,
+          state: 0
+        }
+        params.user.push(user)
+        houseList.splice(i, 0, params)
+        break;
+      }
+    }
+    io.emit('houseList', houseList)
+  })
+  //用户进入
+  socket.on('addUser', (data)=>{
+    houseList.forEach((item, index)=>{
+      if(item.houseId = data.houseId) {
+        let params = {
+          id: data.userId,
+          state: 0
+        }
+        houseList[index].user.push(params)
+      }
+    })
+    io.emit('houseList', houseList)
+  })
+  //用户离开
+  socket.on('userLeave', (data)=>{
+    houseList.forEach((item, index)=>{
+      if(item.houseId==data.houseId) {
+        item.user.forEach((u, number)=>{
+          if(u.id==data.userId){
+            houseList[index].user.splice(number, 1)
+            if(houseList[index].user.length===0) {
+              houseList.splice(index,1)
+            }
+          }
+        });
+      }
+    })
+    io.emit('houseList', houseList)
+  })
+  //准备
+  socket.on('ready', (data)=>{
+    houseList.forEach((item,index)=>{
+      if(item.houseId===data.houseId) {
+        item.user.forEach((u,number)=>{
+          if(u.id===data.userId) {
+            houseList[index].user[number].state = 1
+          }
+        })
+      }
+    })
+  })
+  //出拳
+  socket.on('done',(data)=>{
+    
+  })
+  //消息
   socket.on('message',function(str){
     console.log(str)
     io.to(arrAllSocket[str.to]).emit('message',str);
@@ -43,7 +111,6 @@ io.on('connection',function(socket){
     console.log("已发送")
     Router.saveMsg(str)
   })
-  console.log(" 已连接")
   socket.on('disconnect',function(){
     io.emit('leave',id)
   })
