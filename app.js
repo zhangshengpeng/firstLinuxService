@@ -95,7 +95,7 @@ io.on('connection',function(socket){
       if(item.houseId===data.houseId) {
         item.user.forEach((u, number)=>{
           if(u.id===data.userId) {
-            houseList[index].user[number].state = 1
+            houseList[index].user[number].state = data.state
             houseList[index].user.forEach(()=>{
               io.to(arrAllSocket[u.id]).emit('ready',houseList[index]);
             })
