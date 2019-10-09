@@ -49,7 +49,8 @@ io.on('connection',function(socket){
         params.id = '00'+i;
         let user = {
           id: data.userId,
-          state: 0
+          state: 0,
+          operation:0
         }
         params.user.push(user)
         houseList.splice(i, 0, params)
@@ -64,7 +65,8 @@ io.on('connection',function(socket){
       if(item.houseId = data.houseId) {
         let params = {
           id: data.userId,
-          state: 0
+          state: 0,
+          operation:0
         }
         houseList[index].user.push(params)
       }
@@ -89,11 +91,14 @@ io.on('connection',function(socket){
   })
   //准备
   socket.on('ready', (data)=>{
-    houseList.forEach((item,index)=>{
+    houseList.forEach((item, index)=>{
       if(item.houseId===data.houseId) {
-        item.user.forEach((u,number)=>{
+        item.user.forEach((u, number)=>{
           if(u.id===data.userId) {
             houseList[index].user[number].state = 1
+            houseList[index].user.forEach(()=>{
+              io.to(arrAllSocket[u.id]).emit('ready',houseList[index]);
+            })
           }
         })
       }
@@ -101,7 +106,18 @@ io.on('connection',function(socket){
   })
   //出拳
   socket.on('done',(data)=>{
-    
+    houseList.forEach((item,index)=>{
+      if(item.houseId===data.houseId) {
+        item.user.forEach((u,number)=>{
+          if(u.id===data.userId) {
+            houseList[index].user[number].operation = data.operation
+            houseList[index].user.forEach(()=>{
+              io.to(arrAllSocket[u.id]).emit('opration',houseList[index]);
+            })
+          }
+        })
+      }
+    })
   })
   //消息
   socket.on('message',function(str){
