@@ -47,6 +47,7 @@ io.on('connection',function(socket){
       user: []
     }
     if(houseList.length===0){
+      console.log('插入第一个房间')
       houseList.push({
         houseId: 0,
         type: data.type,
@@ -67,11 +68,13 @@ io.on('connection',function(socket){
           break;
         }
         if(i==(houseList.length-i)){
+          console.log('末尾添加房间')
           houseList.push({
             houseId: i+1,
             type: data.type,
             user: [data.userId]
           })
+          break;
         }
       }
     }
