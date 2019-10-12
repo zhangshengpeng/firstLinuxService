@@ -47,7 +47,7 @@ io.on('connection',function(socket){
     }
     for(let i=0;i<houseList.length;i++) {
       if(houseList[i]!=i) {
-        params.id = '00'+i;
+        params.houseId = '00'+i;
         let user = {
           id: data.userId,
           state: 0,
