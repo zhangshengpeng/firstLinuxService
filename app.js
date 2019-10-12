@@ -138,9 +138,9 @@ io.on('connection',function(socket){
   socket.on('ready', (data)=>{
     console.log('状态修改', data)
     houseList.forEach((item, index)=>{
-      if(item.houseId===data.houseId) {
+      if(item.houseId==data.houseId) {
         item.user.forEach((u, number)=>{
-          if(u.id===data.userId) {
+          if(u.id==data.userId) {
             houseList[index].user[number].state = data.state
             houseList[index].user.forEach(()=>{
               io.to(arrAllSocket[u.id]).emit('ready',houseList[index]);
@@ -153,9 +153,9 @@ io.on('connection',function(socket){
   //出拳
   socket.on('done',(data)=>{
     houseList.forEach((item,index)=>{
-      if(item.houseId===data.houseId) {
+      if(item.houseId==data.houseId) {
         item.user.forEach((u,number)=>{
-          if(u.id===data.userId) {
+          if(u.id==data.userId) {
             houseList[index].user[number].operation = data.operation
             houseList[index].user.forEach(()=>{
               io.to(arrAllSocket[u.id]).emit('opration',houseList[index]);
