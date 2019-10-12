@@ -161,6 +161,7 @@ io.on('connection',function(socket){
             houseList[index].user.forEach(()=>{
               io.to(arrAllSocket[u.id]).emit('opration',houseList[index]);
             })
+            console.log('出拳结果', houseList[index])
           }
         })
       }
