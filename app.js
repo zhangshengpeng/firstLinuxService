@@ -67,7 +67,7 @@ io.on('connection',function(socket){
           console.log('房间状态',houseList)
           break;
         }
-        if(i==(houseList.length-i)){
+        if(i==(houseList.length-1)){
           console.log('末尾添加房间')
           houseList.push({
             houseId: i+1,
