@@ -69,7 +69,6 @@ exports.Insert = (req, res)=> {
 
 exports.userInfo = (req, res)=> {
 	let token = req.cookies.token;
-	console.log(req.cookies)
 	jwt.verify(token, cert, (err, decoded)=> {
 		if(err||!decoded) {
 			res.send({
