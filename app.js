@@ -85,7 +85,8 @@ io.on('connection',function(socket){
   socket.on('addUser', (data)=>{
     console.log('请求插入：', data)
     houseList.forEach((item, index)=>{
-      if(item.houseId = data.houseId) {
+      console.log(item)
+      if(item.houseId == data.houseId) {
         let params = {
           id: data.userId,
           state: 0,
