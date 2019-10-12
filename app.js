@@ -55,6 +55,7 @@ io.on('connection',function(socket){
         }
         params.user.push(user)
         houseList.splice(i, 0, params)
+        console.log('房间状态',houseList)
         break;
       }
     }
