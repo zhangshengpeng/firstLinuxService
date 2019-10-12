@@ -110,6 +110,9 @@ io.on('connection',function(socket){
           operation:0
         }
         houseList[index].user.push(params)
+        houseList[index].user.forEach((item)=>{
+          io.to(arrAllSocket[item.id]).emit('addUser',houseList[index]);
+        })
         console.log('插入结果', houseList)
       }
     })
@@ -133,6 +136,7 @@ io.on('connection',function(socket){
   })
   //准备
   socket.on('ready', (data)=>{
+    console.log('状态修改', data)
     houseList.forEach((item, index)=>{
       if(item.houseId===data.houseId) {
         item.user.forEach((u, number)=>{
