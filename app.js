@@ -40,14 +40,22 @@ io.on('connection',function(socket){
   })
   //创建房间
   socket.on('createHousr',(data)=>{
+    console.log('创建参数',data)
     let params = {
       houseId: '',
       type: data.type,
       user: []
     }
+    if(houseList.length===0){
+      houseList.push({
+        houseId: 0,
+        type: data.type,
+        user: [data.userId]
+      })
+    }
     for(let i=0;i<houseList.length;i++) {
       if(houseList[i]!=i) {
-        params.houseId = '00'+i;
+        params.houseId = i;
         let user = {
           id: data.userId,
           state: 0,
@@ -57,6 +65,13 @@ io.on('connection',function(socket){
         houseList.splice(i, 0, params)
         console.log('房间状态',houseList)
         break;
+      }
+      if(i==(houseList.length-i)){
+        houseList.push({
+          houseId: 0,
+          type: data.type,
+          user: [data.userId]
+        })
       }
     }
     io.emit('houseList', houseList)
