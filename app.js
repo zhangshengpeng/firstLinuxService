@@ -94,6 +94,7 @@ io.on('connection',function(socket){
     }
     
     io.emit('houseList', houseList)
+    io.to(arrAllSocket[data.userId]).emit('createHouse',houseList);
   })
   //用户进入
   socket.on('addUser', (data)=>{
