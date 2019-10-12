@@ -143,7 +143,7 @@ io.on('connection',function(socket){
   })
   socket.on('houseList',()=>{
     console.log('请求大厅列表')
-    io.emit(houseList)
+    io.emit('houseList', houseList)
   })
   //消息
   socket.on('message',function(str){
