@@ -152,6 +152,7 @@ io.on('connection',function(socket){
   })
   //出拳
   socket.on('done',(data)=>{
+    console.log('出拳', data)
     houseList.forEach((item,index)=>{
       if(item.houseId==data.houseId) {
         item.user.forEach((u,number)=>{
