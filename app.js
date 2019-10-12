@@ -51,7 +51,11 @@ io.on('connection',function(socket){
       houseList.push({
         houseId: 0,
         type: data.type,
-        user: [data.userId]
+        user: [{
+          id: data.userId,
+          state: 0,
+          operation:0
+        }]
       })
     } else {
       for(let i=0;i<houseList.length;i++) {
@@ -72,7 +76,11 @@ io.on('connection',function(socket){
           houseList.push({
             houseId: i+1,
             type: data.type,
-            user: [data.userId]
+            user: [{
+              id: data.userId,
+              state: 0,
+              operation:0
+            }]
           })
           break;
         }
