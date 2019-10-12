@@ -39,7 +39,7 @@ io.on('connection',function(socket){
     io.emit('houseList', houseList)
   })
   //创建房间
-  socket.on('createHousr',(data)=>{
+  socket.on('createHouse',(data)=>{
     console.log('创建参数',data)
     let params = {
       houseId: '',
