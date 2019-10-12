@@ -159,7 +159,7 @@ io.on('connection',function(socket){
           if(u.id==data.userId) {
             houseList[index].user[number].operation = data.operation
             houseList[index].user.forEach((u)=>{
-              io.to(arrAllSocket[u.id]).emit('opration',houseList[index]);
+              io.to(arrAllSocket[u.id]).emit('operation',houseList[index]);
             })
             console.log('出拳结果', houseList[index])
           }
