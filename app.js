@@ -36,6 +36,7 @@ io.on('connection',function(socket){
     console.log(id,"加入聊天室")
     arrAllSocket[id] = socket.id
     console.log("online:",arrAllSocket)
+    io.emit('houseList', houseList)
   })
   //创建房间
   socket.on('createHousr',(data)=>{
