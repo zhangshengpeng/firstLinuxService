@@ -92,7 +92,6 @@ io.on('connection',function(socket){
         }
       }
     }
-    
     io.emit('houseList', houseList)
     io.to(arrAllSocket[data.userId]).emit('createHouse',houseList);
   })
@@ -142,6 +141,7 @@ io.on('connection',function(socket){
         item.user.forEach((u, number)=>{
           if(u.id==data.userId) {
             houseList[index].user[number].state = data.state
+            houseList[index].user[number].operation = 0
             houseList[index].user.forEach((i)=>{
               io.to(arrAllSocket[i.id]).emit('ready',houseList[index]);
             })
