@@ -68,7 +68,7 @@ io.on('connection',function(socket){
         }
         if(i==(houseList.length-i)){
           houseList.push({
-            houseId: i+1,
+            houseId: 1,
             type: data.type,
             user: [data.userId]
           })
