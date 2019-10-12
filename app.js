@@ -83,6 +83,7 @@ io.on('connection',function(socket){
   })
   //用户进入
   socket.on('addUser', (data)=>{
+    console.log('请求插入：', data)
     houseList.forEach((item, index)=>{
       if(item.houseId = data.houseId) {
         let params = {
@@ -91,6 +92,7 @@ io.on('connection',function(socket){
           operation:0
         }
         houseList[index].user.push(params)
+        console.log('插入结果', houseList)
       }
     })
     io.emit('houseList', houseList)
