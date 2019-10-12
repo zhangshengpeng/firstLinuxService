@@ -52,28 +52,30 @@ io.on('connection',function(socket){
         type: data.type,
         user: [data.userId]
       })
-    }
-    for(let i=0;i<houseList.length;i++) {
-      if(houseList[i]!=i) {
-        params.houseId = i;
-        let user = {
-          id: data.userId,
-          state: 0,
-          operation:0
+    } else {
+      for(let i=0;i<houseList.length;i++) {
+        if(houseList[i]!=i) {
+          params.houseId = i;
+          let user = {
+            id: data.userId,
+            state: 0,
+            operation:0
+          }
+          params.user.push(user)
+          houseList.splice(i, 0, params)
+          console.log('房间状态',houseList)
+          break;
         }
-        params.user.push(user)
-        houseList.splice(i, 0, params)
-        console.log('房间状态',houseList)
-        break;
-      }
-      if(i==(houseList.length-i)){
-        houseList.push({
-          houseId: 0,
-          type: data.type,
-          user: [data.userId]
-        })
+        if(i==(houseList.length-i)){
+          houseList.push({
+            houseId: 0,
+            type: data.type,
+            user: [data.userId]
+          })
+        }
       }
     }
+    
     io.emit('houseList', houseList)
   })
   //用户进入
