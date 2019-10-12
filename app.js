@@ -53,6 +53,8 @@ io.on('connection',function(socket){
         type: data.type,
         user: [{
           id: data.userId,
+          name: data.userName,
+          url: data.userUrl,
           state: 0,
           operation:0
         }]
@@ -63,6 +65,8 @@ io.on('connection',function(socket){
           params.houseId = i;
           let user = {
             id: data.userId,
+            name: data.userName,
+            url: data.userUrl,
             state: 0,
             operation:0
           }
@@ -78,6 +82,8 @@ io.on('connection',function(socket){
             type: data.type,
             user: [{
               id: data.userId,
+              name: data.userName,
+              url: data.userUrl,
               state: 0,
               operation:0
             }]
@@ -97,6 +103,8 @@ io.on('connection',function(socket){
       if(item.houseId == data.houseId) {
         let params = {
           id: data.userId,
+          name: data.userName,
+          url: data.userUrl,
           state: 0,
           operation:0
         }
