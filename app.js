@@ -183,7 +183,7 @@ io.on('connection',function(socket){
     console.log('用户离开', socket.id)
     arrAllSocket.forEach((item, index)=>{
       if(item==socket.id) {
-        houseList.forEach((house, )=>{
+        houseList.forEach((house)=>{
           house.user.forEach((u,i)=>{
             if(u.id==index) {
               house.user.splice(i,1)
