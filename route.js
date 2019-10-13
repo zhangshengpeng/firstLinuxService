@@ -224,7 +224,7 @@ exports.Friend = function(req,res){
 		}
 	}
 
-exports.setGameResult = (req, res)=>{ 
+exports.setGameResult = (req, res)=>{
 	req = req.body
 	let sql = "INSERT INTO gamelist(houseId, type, userA, userB, userAOperation, userBOperation, date) VALUE (?,?,?,?,?,?,?)"
 		let date = new Date() 
@@ -237,7 +237,19 @@ exports.setGameResult = (req, res)=>{
 					console.log(err)
 			}
 	}) 
-}   
+}
+
+exports.getGameResult = (req, res)=> {
+	req = req.body
+	let sql = `SELECT * FROM gamelist WHERE userA = ${req.id}`
+	connection.query(sql,(err, result)=>{
+		if(result) {
+			res.send(result)
+		} else if(err) {
+			console.log(err)
+		}
+	})
+}
 
 
 
