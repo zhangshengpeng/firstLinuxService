@@ -235,7 +235,7 @@ app.post('/img',upload.single('img'),Router.Img);
 app.post('/friend',Router.Friend)
 app.post('/history', Router.History)
 app.post('/set-game', Router.setGameResult)
-app.post('/get-game', Router.getGameResult)
+// app.post('/get-game', Router.getGameResult)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
