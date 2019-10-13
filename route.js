@@ -224,7 +224,7 @@ exports.Friend = function(req,res){
 		}
 	}
 
-exports.setGameResult = (req, res)=>{
+exports.setGameResult = (req, res)=>{ 
 	let sql = "INSERT INTO gamelist(houseId, type, winner, loser, date) VALUE (?,?,?,?,?)"
 	let date = new Date()
 	let params = [req.houseId, req.type, req.winner, req.loser, date]
