@@ -199,7 +199,7 @@ io.on('connection',function(socket){
         console.log("队列：",arrAllSocket)
       }
     })
-    io.emit('leave',socket.id)
+    io.emit('houseList', houseList)
   })
 })
 
