@@ -222,7 +222,18 @@ exports.Friend = function(req,res){
 			})
 			
 		}
-}
+	}
 
+exports.setGameResult = (req, res)=>{
+	let sql = "INSERT INTO gamelist(houseId, type, winner, loser, date) VALUE (?,?,?,?,?)"
+	let date = new Date()
+	let params = [req.houseId, req.type, req.winner, req.loser, date]
+	connection.query(sql, params, (err, result)=>{
+		if (result) {
+			console.log("插入成功")
+			res.send({status:1})
+		}
+	})
+}
 
 
