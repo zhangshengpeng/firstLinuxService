@@ -183,7 +183,7 @@ io.on('connection',function(socket){
     console.log('用户离开', socket.id)
     arrAllSocket.forEach((item, index)=>{
       if(item==socket.id) {
-        arrAllSocket[index].split(index,1)
+        arrAllSocket[index].splice(index,1)
         console.log("队列：",arrAllSocket)
       }
     })
