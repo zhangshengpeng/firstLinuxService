@@ -181,6 +181,12 @@ io.on('connection',function(socket){
   })
   socket.on('disconnect',function(){
     console.log('用户离开', socket.id)
+    arrAllSocket.forEach((item, index)=>{
+      if(item==socket.id) {
+        arrAllSocket[index].split(index,1)
+        console.log("队列：",arrAllSocket)
+      }
+    })
     io.emit('leave',socket.id)
   })
 })
