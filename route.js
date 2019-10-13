@@ -232,6 +232,8 @@ exports.setGameResult = (req, res)=>{
 		if (result) {
 			console.log("插入成功")
 			res.send({status:1})
+		} else if(err){
+			console.log(err)
 		}
 	})
 }
