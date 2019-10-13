@@ -225,18 +225,19 @@ exports.Friend = function(req,res){
 	}
 
 exports.setGameResult = (req, res)=>{ 
-	console.log(res)
-	let sql = "INSERT INTO gamelist(houseId, type, userA, userB, userAOperation, userBOperation) VALUE (?,?,?,?,?,?)"
-	// let date = new Date()
-	let params = [req.houseId, req.type, req.userA, req.userB, req.userAOperation, rsq.userBOperation]
+	req = req.body
+	let sql = "INSERT INTO gamelist(houseId, type, userA, userB, userAOperation, userBOperation, data) VALUE (?,?,?,?,?,?,?)"
+		let date = new Date() 
+	let params = [req.houseId, req.type, req.userA, req.userB, req.userAOperation, req.userBOperation, date]
 	connection.query(sql, params, (err, result)=>{
-		if (result) {
-			console.log("插入成功")
-			res.send({status:1})
-		} else if(err){
-			console.log(err)
-		}
-	})
-}
+			if (result) {
+					console.log("插入成功") 
+					res.send({status:1})
+			} else if(err){
+					console.log(err)
+			}
+	}) 
+}   
+
 
 
