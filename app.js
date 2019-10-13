@@ -179,9 +179,9 @@ io.on('connection',function(socket){
     console.log("已发送")
     Router.saveMsg(str)
   })
-  socket.on('disconnect',function(id){
-    console.log('用户离开', id)
-    io.emit('leave',id)
+  socket.on('disconnect',function(){
+    console.log('用户离开', socket.id)
+    io.emit('leave',socket.id)
   })
 })
 
