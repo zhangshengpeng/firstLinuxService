@@ -184,11 +184,14 @@ io.on('connection',function(socket){
     arrAllSocket.forEach((item, index)=>{
       if(item==socket.id) {
         console.log('匹配成功')
-        houseList.forEach((house)=>{
+        houseList.forEach((house, I)=>{
           house.user.forEach((u,i)=>{
             if(u.id==index) {
               console.log('离开用户：', u)
               house.user.splice(i,1)
+              if(house.user.length==0) {
+                houseList.splice(I, 1)
+              }
             }
           })
         })
