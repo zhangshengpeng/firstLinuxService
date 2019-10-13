@@ -241,7 +241,7 @@ exports.setGameResult = (req, res)=>{
 
 exports.getGameResult = (req, res)=> {
 	req = req.body
-	let sql = `SELECT * FROM gamelist WHERE userA = ${req.id}`
+	let sql = `SELECT * FROM gamelist WHERE userA = ${req.userA}`
 	connection.query(sql,(err, result)=>{
 		if(result) {
 			res.send(result)
