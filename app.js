@@ -3,20 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mysql = require('mysql')
 var multer = require('multer')
-var fs = require('fs');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+//gzip插件
+let compression = require('compression')
+
 var Router = require('./route');
 
-var app = express();
 
-let jwt = require('jsonwebtoken');
-let cert = fs.readFileSync('./private.key');
-let token 
 
-var id 
+
 var arrAllSocket = []
 let houseList = []
 
@@ -207,6 +205,7 @@ io.on('connection',function(socket){
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(compression());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
