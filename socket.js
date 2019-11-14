@@ -1,3 +1,5 @@
+let Router = require('./route')
+
 let socketio = {};
 let socket_io = require('socket.io')
 
