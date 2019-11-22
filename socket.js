@@ -19,7 +19,6 @@ socketio.getSocketio = (server)=>{
         //传输图像信息
         socket.on('action', (data)=>{
           console.log(data)
-          io.emit('houseList', houseList)
           io.emit('ac', data)
         })
         //创建房间
