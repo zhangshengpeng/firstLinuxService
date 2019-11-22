@@ -18,7 +18,9 @@ socketio.getSocketio = (server)=>{
         })
         //传输图像信息
         socket.on('action', (data)=>{
-          io.emit('action', data)
+          console.log(data)
+          io.emit('houseList', houseList)
+          io.emit('ac', data)
         })
         //创建房间
         socket.on('createHouse',(data)=>{
@@ -165,7 +167,6 @@ socketio.getSocketio = (server)=>{
           console.log('用户离开', socket.id)
           arrAllSocket.forEach((item, index)=>{
             if(item==socket.id) {
-              console.log('匹配成功')
               houseList.forEach((house, I)=>{
                 house.user.forEach((u,i)=>{
                   if(u.id==index) {
