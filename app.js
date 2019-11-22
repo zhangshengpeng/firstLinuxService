@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var multer = require('multer')
 var app = express();
-var http = require('http').Server(app);
 //gzip插件
 let compression = require('compression')
 

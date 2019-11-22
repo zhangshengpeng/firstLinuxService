@@ -16,6 +16,10 @@ socketio.getSocketio = (server)=>{
           console.log("online:",arrAllSocket)
           io.emit('houseList', houseList)
         })
+        //传输图像信息
+        socket.on('action', (data)=>{
+          io.emit('action', data)
+        })
         //创建房间
         socket.on('createHouse',(data)=>{
           console.log('创建参数',data)
