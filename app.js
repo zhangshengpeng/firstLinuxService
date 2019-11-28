@@ -5,8 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var multer = require('multer')
 
-console.log(ctx.createImageData(1000, 820))
-
 var app = express();
 //gzip插件
 let compression = require('compression')
