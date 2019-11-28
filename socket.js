@@ -8,6 +8,7 @@ let canvas = require('canvas')
 
 var arrAllSocket = []
 let houseList = []
+let canvs = []
 
 socketio.getSocketio = (server)=>{
     let io = socket_io.listen(server);
@@ -36,8 +37,8 @@ socketio.getSocketio = (server)=>{
           }
           if(data.type==='2'){
             let canv = canvas.createCanvas(1000, 820)
-            let ctx = canv.getContext('2d')
-            params.canv = ctx
+            ctx = canv.getContext('2d')
+            canvs.push(ctx)
           }
           if(houseList.length===0){
             console.log('插入第一个房间')
@@ -136,6 +137,18 @@ socketio.getSocketio = (server)=>{
         socket.on('houseList',()=>{
           console.log('请求大厅列表')
           io.emit('houseList', houseList)
+        })
+        //画布更新及转发
+        socket.on('action', (data)=>{
+          console.log('笔画信息')
+          let house = houseList.filter((item)=>{
+            if(item.houseId===data.houseId){
+              return item
+            }
+          })[0]
+          house.user.forEach((item)=>{
+            io.to(arrAllSocket[item.id]).emit('ac',data);
+          })
         })
         //消息
         socket.on('message',function(str){
