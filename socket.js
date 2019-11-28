@@ -34,12 +34,12 @@ socketio.getSocketio = (server)=>{
               operation:0
             }]
           }
-          if(houseList.length===0){
+          if(houseList.length==0){
             console.log('插入第一个房间')
             params.houseId = 0
-            if(data.type==='2'){
+            if(data.type=='2'){
               let canv = canvas.createCanvas(1000, 820)
-              canvs[0] = canv.getContext('2d')
+              canvs[0] = canv
             }
             houseList.push(params)
           } else {
@@ -47,9 +47,8 @@ socketio.getSocketio = (server)=>{
               if(houseList[i].houseId!=i) {
                 params.houseId = i;
                 houseList.splice(i, 0, params)
-                if(data.type==='2'){
-                  let canv = canvas.createCanvas(1000, 820)
-                  canvs[i] = canv.getContext('2d')
+                if(data.type=='2'){
+                  canvs[i] = canvas.createCanvas(1000, 820)
                 }
                 console.log('房间状态',houseList)
                 break;
@@ -58,9 +57,8 @@ socketio.getSocketio = (server)=>{
                 console.log('末尾添加房间')
                 params.houseId = i+1
                 houseList.push(params)
-                if(data.type==='2'){
-                  let canv = canvas.createCanvas(1000, 820)
-                  canvs[i+1] = canv.getContext('2d')
+                if(data.type=='2'){
+                  canvs[i+1] = canvas.createCanvas(1000, 820)
                 }
                 break;
               }
@@ -148,13 +146,16 @@ socketio.getSocketio = (server)=>{
         })
         //画布更新及转发
         socket.on('action', (data)=>{
-          console.log('笔画信息')
+          console.log('houseList:',houseList)
           let house = houseList.filter((item)=>{
-            if(item.houseId===data.houseId){
+            if(item.houseId==data.houseId){
               return item
             }
           })
-          let ctx = canv[data.houseId]
+	  console.log(house)
+          let canv = canvs[data.houseId]
+	  console.log('canv:',canv)
+	  let ctx = canv.getContext('2d')
           ctx.strokeStyle = data.pen.color
           ctx.fillStyle = data.pen.color
           ctx.lineWidth = data.pen.size
@@ -164,12 +165,12 @@ socketio.getSocketio = (server)=>{
             if(index===0) {
               ctx.arc(item.x, item.y, 0, 0, 2*Math.PI, true)
               ctx.stroke();
-              window.console.log('执行fill')
+              console.log('执行fill')
             }
             ctx.stroke()
           })
           ctx.beginPath()
-          console.log(ctx.toDataURL('image/png'))
+          console.log(canv.toDataURL('image/png'))
           house[0].user.forEach((item)=>{
             io.to(arrAllSocket[item.id]).emit('ac',data);
           })
