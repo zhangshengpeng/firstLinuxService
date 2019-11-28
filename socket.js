@@ -24,7 +24,7 @@ socketio.getSocketio = (server)=>{
         socket.on('createHouse',(data)=>{
           console.log('创建参数',data)
           let params = {
-            houseId: data.houseId,
+            houseId: '',
             type: data.type,
             user: [{
               id: data.userId,
@@ -34,19 +34,23 @@ socketio.getSocketio = (server)=>{
               operation:0
             }]
           }
-          if(data.type==='2'){
-            let canv = canvas.createCanvas(1000, 820)
-            ctx = canv.getContext('2d')
-            canvs.push(ctx)
-          }
           if(houseList.length===0){
             console.log('插入第一个房间')
+            params.houseId = 0
+            if(data.type==='2'){
+              let canv = canvas.createCanvas(1000, 820)
+              canvs[0] = canv.getContext('2d')
+            }
             houseList.push(params)
           } else {
             for(let i=0;i<houseList.length;i++) {
               if(houseList[i].houseId!=i) {
                 params.houseId = i;
                 houseList.splice(i, 0, params)
+                if(data.type==='2'){
+                  let canv = canvas.createCanvas(1000, 820)
+                  canvs[i] = canv.getContext('2d')
+                }
                 console.log('房间状态',houseList)
                 break;
               }
@@ -54,10 +58,15 @@ socketio.getSocketio = (server)=>{
                 console.log('末尾添加房间')
                 params.houseId = i+1
                 houseList.push(params)
+                if(data.type==='2'){
+                  let canv = canvas.createCanvas(1000, 820)
+                  canvs[i+1] = canv.getContext('2d')
+                }
                 break;
               }
             }
           }
+          
           io.emit('houseList', houseList)
           io.to(arrAllSocket[data.userId]).emit('createHouse',houseList);
         })
@@ -145,9 +154,25 @@ socketio.getSocketio = (server)=>{
               return item
             }
           })
-          // house.user.forEach((item)=>{
-          //   io.to(arrAllSocket[item.id]).emit('ac',data);
-          // })
+          let ctx = canv[data.houseId]
+          ctx.strokeStyle = data.pen.color
+          ctx.fillStyle = data.pen.color
+          ctx.lineWidth = data.pen.size
+
+          data.arr.forEach((item, index)=>{
+            ctx.lineTo(item.x, item.y);
+            if(index===0) {
+              ctx.arc(item.x, item.y, 0, 0, 2*Math.PI, true)
+              ctx.stroke();
+              window.console.log('执行fill')
+            }
+            ctx.stroke()
+          })
+          ctx.beginPath()
+          console.log(ctx.toDataURL('image/png'))
+          house[0].user.forEach((item)=>{
+            io.to(arrAllSocket[item.id]).emit('ac',data);
+          })
         })
         //消息
         socket.on('message',function(str){
