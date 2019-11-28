@@ -3,6 +3,9 @@ let Router = require('./route')
 let socketio = {};
 let socket_io = require('socket.io')
 
+//node-canvas
+let canvas = require('canvas')
+
 var arrAllSocket = []
 let houseList = []
 
@@ -16,61 +19,41 @@ socketio.getSocketio = (server)=>{
           console.log("online:",arrAllSocket)
           io.emit('houseList', houseList)
         })
-        //传输图像信息
-        socket.on('action', (data)=>{
-          console.log(data)
-          io.emit('ac', data)
-        })
         //创建房间
         socket.on('createHouse',(data)=>{
           console.log('创建参数',data)
           let params = {
             houseId: '',
             type: data.type,
-            user: []
+            user: [{
+              id: data.userId,
+              name: data.userName,
+              url: data.userUrl,
+              state: 0,
+              operation:0
+            }],
+            canv: {}
+          }
+          if(data.type==='2'){
+            let canv = canvas.createCanvas(1000, 820)
+            let ctx = canv.getContext('2d')
+            params.canv = ctx
           }
           if(houseList.length===0){
             console.log('插入第一个房间')
-            houseList.push({
-              houseId: 0,
-              type: data.type,
-              user: [{
-                id: data.userId,
-                name: data.userName,
-                url: data.userUrl,
-                state: 0,
-                operation:0
-              }]
-            })
+            houseList.push(params)
           } else {
             for(let i=0;i<houseList.length;i++) {
               if(houseList[i].houseId!=i) {
                 params.houseId = i;
-                let user = {
-                  id: data.userId,
-                  name: data.userName,
-                  url: data.userUrl,
-                  state: 0,
-                  operation:0
-                }
-                params.user.push(user)
                 houseList.splice(i, 0, params)
                 console.log('房间状态',houseList)
                 break;
               }
               if(i==(houseList.length-1)){
                 console.log('末尾添加房间')
-                houseList.push({
-                  houseId: i+1,
-                  type: data.type,
-                  user: [{
-                    id: data.userId,
-                    name: data.userName,
-                    url: data.userUrl,
-                    state: 0,
-                    operation:0
-                  }]
-                })
+                params.houseId = i+1
+                houseList.push(params)
                 break;
               }
             }

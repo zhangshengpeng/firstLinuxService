@@ -5,10 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var multer = require('multer')
 
-let canvas = require('canvas')
-let canv = canvas.createCanvas(1000, 820)
-let ctx = canv.getContext('2d')
-console.log(ctx.createImageData)
+console.log(ctx.createImageData(1000, 820))
 
 var app = express();
 //gzip插件
