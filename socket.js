@@ -152,10 +152,8 @@ socketio.getSocketio = (server)=>{
               return item
             }
           })
-	  console.log(house)
           let canv = canvs[data.houseId]
-	  console.log('canv:',canv)
-	  let ctx = canv.getContext('2d')
+	        let ctx = canv.getContext('2d')
           ctx.strokeStyle = data.pen.color
           ctx.fillStyle = data.pen.color
           ctx.lineWidth = data.pen.size
@@ -170,10 +168,12 @@ socketio.getSocketio = (server)=>{
             ctx.stroke()
           })
           ctx.beginPath()
-          console.log(canv.toDataURL('image/png'))
-          house[0].user.forEach((item)=>{
-            io.to(arrAllSocket[item.id]).emit('ac',data);
-          })
+          // console.log(canv.toDataURL('image/png'))
+          if(house.length>0){
+            house[0].user.forEach((item)=>{
+              io.to(arrAllSocket[item.id]).emit('ac',data);
+            })
+          }
         })
         //消息
         socket.on('message',function(str){
