@@ -24,7 +24,7 @@ socketio.getSocketio = (server)=>{
         socket.on('createHouse',(data)=>{
           console.log('创建参数',data)
           let params = {
-            houseId: '',
+            houseId: data.houseId,
             type: data.type,
             user: [{
               id: data.userId,
@@ -32,8 +32,7 @@ socketio.getSocketio = (server)=>{
               url: data.userUrl,
               state: 0,
               operation:0
-            }],
-            canv: {}
+            }]
           }
           if(data.type==='2'){
             let canv = canvas.createCanvas(1000, 820)
@@ -145,10 +144,10 @@ socketio.getSocketio = (server)=>{
             if(item.houseId===data.houseId){
               return item
             }
-          })[0]
-          house.user.forEach((item)=>{
-            io.to(arrAllSocket[item.id]).emit('ac',data);
           })
+          // house.user.forEach((item)=>{
+          //   io.to(arrAllSocket[item.id]).emit('ac',data);
+          // })
         })
         //消息
         socket.on('message',function(str){
