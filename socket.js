@@ -72,7 +72,6 @@ socketio.getSocketio = (server)=>{
         socket.on('addUser', (data)=>{
           console.log('请求插入：', data)
           houseList.forEach((item, index)=>{
-            console.log(item)
             if(item.houseId == data.houseId) {
               let params = {
                 id: data.userId,
@@ -143,6 +142,14 @@ socketio.getSocketio = (server)=>{
         socket.on('houseList',()=>{
           console.log('请求大厅列表')
           io.emit('houseList', houseList)
+        })
+        //获取房间用户
+          socket.on('getUsers',(houseId)=>{
+          houseList.forEach((item)=>{
+            if(item.houseId==houseId){
+              io.emit('getUser', item.user)
+            }
+          })
         })
         //画布更新及转发
         socket.on('action', (data)=>{
