@@ -170,7 +170,7 @@ socketio.getSocketio = (server)=>{
           data.arr.forEach((item, index)=>{
             ctx.lineTo(item.x, item.y);
             if(index===0) {
-              ctx.arc(item.x, item.y, 0, 0, 2*Math.PI, true)
+              ctx.arc(x, y, data.pen.size/2, 0, 2*Math.PI, true)
               ctx.fill();
               console.log('画点')
             }
