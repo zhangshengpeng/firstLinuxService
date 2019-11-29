@@ -35,7 +35,6 @@ socketio.getSocketio = (server)=>{
             }]
           }
           if(houseList.length==0){
-            console.log('插入第一个房间')
             params.houseId = 0
             if(data.type=='2'){
               let canv = canvas.createCanvas(1000, 820)
@@ -50,11 +49,9 @@ socketio.getSocketio = (server)=>{
                 if(data.type=='2'){
                   canvs[i] = canvas.createCanvas(1000, 820)
                 }
-                console.log('房间状态',houseList)
                 break;
               }
               if(i==(houseList.length-1)){
-                console.log('末尾添加房间')
                 params.houseId = i+1
                 houseList.push(params)
                 if(data.type=='2'){
@@ -70,7 +67,6 @@ socketio.getSocketio = (server)=>{
         })
         //用户进入
         socket.on('addUser', (data)=>{
-          console.log('请求插入：', data)
           houseList.forEach((item, index)=>{
             if(item.houseId == data.houseId) {
               let params = {
@@ -166,16 +162,18 @@ socketio.getSocketio = (server)=>{
           ctx.strokeStyle = data.pen.color
           ctx.fillStyle = data.pen.color
           ctx.lineWidth = data.pen.size
-
-          data.arr.forEach((item, index)=>{
-            ctx.lineTo(item.x, item.y);
-            if(index===0) {
-              ctx.arc(item.x, item.y, 0, 0, 2*Math.PI, true)
-              ctx.fill();
-              console.log('画点')
-            }
-            ctx.stroke()
-          })
+          if(data.arr.length===1) {
+            ctx.beginPath()
+            ctx.moveTo(data.arr[0].x, data.arr[0].y)
+            ctx.arc(x, y, data.pen.size/2, 0, 2*Math.PI, true)
+            ctx.fill();
+            console.log('画点')
+          }else {
+            data.arr.forEach((item)=>{
+              ctx.lineTo(item.x, item.y);
+              ctx.stroke()
+            })
+          }
           ctx.beginPath()
           if(house.length>0){
             house[0].user.forEach((item)=>{
