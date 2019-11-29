@@ -177,6 +177,9 @@ socketio.getSocketio = (server)=>{
         })
         //初次加载画布数据
         socket.on('RoomInit',(data)=>{
+	console.log('socket',arrAllSocket,data)
+	//console.log(canvs[data.houseId].toDataURL('image/png'))
+	//  io.emit('RoomInit',canvs[data.houseId].toDataURL('image/png'))
           io.to(arrAllSocket[data.userId]).emit('RoomInit',canvs[data.houseId].toDataURL('image/png'));
         })
         //消息
