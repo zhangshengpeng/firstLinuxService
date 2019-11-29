@@ -165,7 +165,7 @@ socketio.getSocketio = (server)=>{
           if(data.arr.length===1) {
             ctx.beginPath()
             ctx.moveTo(data.arr[0].x, data.arr[0].y)
-            ctx.arc(x, y, data.pen.size/2, 0, 2*Math.PI, true)
+            ctx.arc(data.arr[0].x, data.arr[0].y, data.pen.size/2, 0, 2*Math.PI, true)
             ctx.fill();
             console.log('画点')
           }else {
