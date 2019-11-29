@@ -171,8 +171,8 @@ socketio.getSocketio = (server)=>{
             ctx.lineTo(item.x, item.y);
             if(index===0) {
               ctx.arc(item.x, item.y, 0, 0, 2*Math.PI, true)
-              ctx.stroke();
-              console.log('执行fill')
+              ctx.fill();
+              console.log('画点')
             }
             ctx.stroke()
           })
