@@ -37,7 +37,7 @@ socketio.getSocketio = (server)=>{
           if(houseList.length==0){
             params.houseId = 0
             if(data.type=='2'){
-              let canv = canvas.createCanvas(1000, 820)
+              let canv = canvas.createCanvas(1000, 800)
               canvs[0] = canv
             }
             houseList.push(params)
@@ -47,7 +47,7 @@ socketio.getSocketio = (server)=>{
                 params.houseId = i;
                 houseList.splice(i, 0, params)
                 if(data.type=='2'){
-                  canvs[i] = canvas.createCanvas(1000, 820)
+                  canvs[i] = canvas.createCanvas(1000, 800)
                 }
                 break;
               }
@@ -55,7 +55,7 @@ socketio.getSocketio = (server)=>{
                 params.houseId = i+1
                 houseList.push(params)
                 if(data.type=='2'){
-                  canvs[i+1] = canvas.createCanvas(1000, 820)
+                  canvs[i+1] = canvas.createCanvas(1000, 800)
                 }
                 break;
               }
