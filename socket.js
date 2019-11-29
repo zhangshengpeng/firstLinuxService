@@ -98,6 +98,7 @@ socketio.getSocketio = (server)=>{
                   houseList[index].user.splice(number, 1)
                   if(houseList[index].user.length===0) {
                     houseList.splice(index,1)
+                    canvs.splice(index,1)
                   }
                 }
               });
@@ -175,7 +176,6 @@ socketio.getSocketio = (server)=>{
             ctx.stroke()
           })
           ctx.beginPath()
-          // console.log(canv.toDataURL('image/png'))
           if(house.length>0){
             house[0].user.forEach((item)=>{
               io.to(arrAllSocket[item.id]).emit('ac',data);
