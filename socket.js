@@ -91,6 +91,7 @@ socketio.getSocketio = (server)=>{
         })
         //用户离开
         socket.on('userLeave', (data)=>{
+          console.log('用户离开：',data)
           houseList.forEach((item, index)=>{
             if(item.houseId==data.houseId) {
               item.user.forEach((u, number)=>{
