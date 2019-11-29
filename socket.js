@@ -97,6 +97,7 @@ socketio.getSocketio = (server)=>{
                 if(u.id==data.userId){
                   houseList[index].user.splice(number, 1)
                   if(houseList[index].user.length===0) {
+                    console.log('清除房间及画布')
                     houseList.splice(index,1)
                     canvs.splice(index,1)
                   }
@@ -154,7 +155,6 @@ socketio.getSocketio = (server)=>{
         })
         //画布更新及转发
         socket.on('action', (data)=>{
-          console.log('houseList:',houseList)
           let house = houseList.filter((item)=>{
             if(item.houseId==data.houseId){
               return item
