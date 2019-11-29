@@ -146,7 +146,7 @@ socketio.getSocketio = (server)=>{
         //获取房间用户
           socket.on('getUsers',(houseId)=>{
           houseList.forEach((item)=>{
-            if(item.houseId===houseId){
+            if(item.houseId==houseId){
               io.emit('getUser', item.user)
             }
           })
