@@ -185,6 +185,10 @@ socketio.getSocketio = (server)=>{
         socket.on('RoomInit',(data)=>{
           io.to(arrAllSocket[data.userId]).emit('RoomInit',canvs[data.houseId].toDataURL('image/png'));
         })
+        //敲砖块
+        socket.on('brick', (data)=>{
+          io.emit('brick', data)
+        })
         //消息
         socket.on('message',function(str){
           console.log(str)
