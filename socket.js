@@ -187,6 +187,7 @@ socketio.getSocketio = (server)=>{
         })
         //敲砖块
         socket.on('brick', (data)=>{
+          console.log(data)
           io.emit('brick', data)
         })
         //消息
