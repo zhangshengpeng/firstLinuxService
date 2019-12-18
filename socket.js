@@ -190,8 +190,12 @@ socketio.getSocketio = (server)=>{
         })
         //敲砖块
         socket.on('brick', (data)=>{
-          console.log(data)
+          // console.log(data)
           io.emit('brick', data)
+        })
+        socket.on('ball', (data)=>{
+          // console.log(data)
+          io.emit('ball', data)
         })
         //消息
         socket.on('message',function(str){
