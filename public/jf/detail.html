@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>积分明细</title>
+  <link rel="stylesheet" href="./css/detail.css">
+</head>
+<body>
+  <div v-cloak id="app">
+    <div class="tips">积分当月有效，更新周期为1个小时</div>
+    <div class="table-box">
+      <div class="border" v-for="(item, index) in list" :key="index">
+        <div class="item">
+          <div>
+            <p class="title">{{ item.reason }}</p>
+            <p class="time">{{ item.createTime }}</p>
+          </div>
+          <div v-if="item.type===1" class="add">{{ item.integral }}</div>
+          <div v-else class="exchange">{{ item.integral }}</div>
+        </div>
+      </div>
+      <infinite-loading @infinite="onInfinite" ref="infiniteLoading" spinner="spiral"> 
+        <div slot="no-results" style="padding:18px 0;font-size:12px;color:#999999;text-align: center;">
+          暂无数据
+        </div>
+        <div slot="no-more" style="padding:18px 0;font-size:12px;color:#999999;text-align: center;">
+          没有更多了~
+        </div>
+      </infinite-loading>
+    </div>
+    <a class="introduce" href="https://h5.welian.com/toutiao/preview/5593">积分说明</a>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./js/vue-infinite-loading.js"></script>
+
+<script src="https://fed.welian.com/libs/other/jwelian-2.1.0.min.js"></script>
+<script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
+<script>
+  // let vConsole = new VConsole();
+
+  let app = new Vue({
+    el: '#app',
+    components: {
+     VueInfiniteLoading:VueInfiniteLoading.default,
+    },
+    data: {
+      uid: '0',
+      page: 1,
+      list: []
+    },
+    methods: {
+    async onInfinite($state) {
+        jwl.login({
+          success: (res)=>{
+            this.uid = res.uid
+            let params = {
+              page: this.page,
+              size: 10
+            }
+            axios.get(`http://dev-h5.welian.com/investor/getInvestorIntegralDetail/${this.uid}`,{ params })
+            .then((res)=>{
+              if(res.data.data.count>0){
+                this.list = this.list.concat(res.data.data.list)
+              this.page++
+              $state.loaded()
+              } else {
+                $state.complete()
+              }
+            })
+          },
+          fail:(err)=>{
+            console.log(err)
+            $state.complete()
+          }
+        })
+      }
+    }
+  })
+</script>
+</body>
+</html>
