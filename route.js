@@ -115,7 +115,7 @@ exports.saveMsg = (str)=> {
 			}
 		})
 }
-exports.saveCanv() = (data)=> {
+exports.saveCanv = (data)=> {
 	if(data.paintingId) {
 		let sql = `UPDATE painting SET base64 = ? WHERE paintingId = '${data.paintingId}'`
 		connection.query(sql,data.canv,(err,result)=>{
