@@ -127,7 +127,9 @@ exports.saveCanv = (data)=> {
 					if(err) {
 						console.log(err)
 					} else {
-						console.log(result)
+						return {
+							status: 1
+						}
 					}
 				})
 			}
@@ -146,7 +148,10 @@ exports.saveCanv = (data)=> {
 					if(err) {
 						console.log(err)
 					} else {
-						console.log(result)
+						return {
+							status: 1,
+							paintingId: result[0].paintingId+1
+						}
 					}
 				})
 			}
