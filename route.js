@@ -123,12 +123,12 @@ exports.saveCanv = (data)=> {
 			else console.log(result)
 		})
 	} else {
-		let sql = `SELECT * FROM painting`
+		let sql = `SELECT * FROM painting order by paintingId desc limit 1`
 		connection.query(sql,(err, result)=> {
 			if(err) {
 				console.log(err)
 			} else {
-				console.log(result)
+				console.log(result[0].id)
 			}
 		})
 	}
