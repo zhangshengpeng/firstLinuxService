@@ -122,6 +122,15 @@ exports.saveCanv = (data)=> {
 			if (err) { console.log(err) }
 			else console.log(result)
 		})
+	} else {
+		let sql = `SELECT TOP 1 * FROM painting order by paintingId desc`
+		connection.query(sql,(err, result)=> {
+			if(err) {
+				console.log(err)
+			} else {
+				console.log(result)
+			}
+		})
 	}
 }
 exports.History = (req, res)=> {
