@@ -153,6 +153,7 @@ exports.saveCanv = (data)=> {
 							paintingId: result[0].paintingId+1
 						}
 					}
+					console.log('2',result[0].paintingId+1)
 				})
 			}
 		})
