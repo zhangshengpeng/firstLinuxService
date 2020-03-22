@@ -192,9 +192,7 @@ socketio.getSocketio = (server)=>{
         socket.on('saveCanv',(data)=>{
           data.canv = canvs[data.houseId].toDataURL('image/png')
           
-          Router.saveCanv(data).than((data)=>{
-            console.log("保存结果", res)
-          })
+          Router.saveCanv(data)
         })
         //敲砖块
         socket.on('brick', (data)=>{
