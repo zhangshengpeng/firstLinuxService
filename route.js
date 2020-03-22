@@ -116,7 +116,7 @@ exports.saveMsg = (str)=> {
 		})
 }
 exports.saveCanv = (data)=> { 
-	if(data.paintingId) {
+	if(data.paintingId >0) {
 		let sql = `UPDATE painting SET base64 = ? WHERE paintingId = '${data.paintingId}'`
 		connection.query(sql,data.canv,(err,result)=>{
 			if (err) { console.log(err) }
