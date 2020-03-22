@@ -1,0 +1,122 @@
+body{
+  margin: 0;
+  padding-bottom: 80px;
+}
+span ,p,div{
+  font-family:PingFangSC-Regular,PingFang SC;
+}
+.table{
+  text-align: center;
+  margin: 16px;
+}
+.list{
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+.name{
+  color: #30448D;
+  font-size: 12px;
+  width: 115px;
+  flex-shrink: 0;
+  flex-grow: 1;
+  border-radius: 0 0 0 4px;
+}
+.name div:first-child{
+  height: 30px;
+  line-height: 30px;
+  background-image: linear-gradient(to right, #5AA0FF, #4c8aff);
+  border-radius: 4px 0 0 0;
+  color: #ffffff;
+}
+.name div{
+  background-color: #edf3ff;
+  border-bottom: solid 1px #ffffff;
+}
+.goods{
+  color: #666666;
+  font-size: 13px;
+  width: 114px;
+  flex-grow: 1;
+}
+.goods div:first-child{
+  height: 30px;
+  line-height: 30px;
+  background-image: linear-gradient(to right,#4c8aff, #3e71fb);
+  color: #ffffff;
+}
+.goods div{
+  height: 30px;
+  border-left:solid 1px #ffffff;
+  border-right:solid 1px #ffffff;
+  border-bottom: solid 1px #ffffff;
+  line-height: 30px;
+  background: #f6f9ff;
+}
+.jifen{
+  flex-grow: 1;
+  width: 114px;
+}
+.jifen div:first-child{
+  height: 30px;
+  line-height: 30px;
+  background-image: linear-gradient(to right, #3e71fb, #305afa);
+  border-radius: 0 4px 0 0;
+  color: #ffffff;
+}
+.jifen div{
+  color: #666666;
+  font-size: 13px;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: solid 1px #ffffff;
+  background: #f6f9ff;
+}
+.intro{
+  margin-top: 20px;
+}
+.item{
+  margin: 0 16px 16px 16px;
+  display: flex;
+}
+.item p{
+  margin: 8px 0;
+}
+.item-img{
+  margin-right: 8px;
+}
+.item-img img{
+  width: 60px;
+  height: 60px;
+}
+.item-name{
+  color: #333333;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+.item-intro{
+  color: #666666;
+  font-size: 12px;
+}
+.server{
+  position: fixed;
+  width: 100vw;
+  text-align: center;
+  bottom: 0;
+  height: 60px;
+  background: #ffffff;
+  box-shadow:0px -2px 6px 0px rgba(0,0,0,0.1);
+}
+.server div{
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 400;
+  height: 44px;
+  margin: 8px 18px;
+  line-height: 44px;
+  border-radius: 4px;
+  background-image: linear-gradient(to right, #5AA0FF, #305AFA);
+}
+.layer-7{
+  display: none;
+}
