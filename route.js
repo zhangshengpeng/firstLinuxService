@@ -140,7 +140,7 @@ exports.saveCanv = (data)=> {
 			} else {
 				console.log(result[0].paintingId)
 				let sql = `INSERT INTO painting (paintingId, base64, user1, user2, user3, user4, user5) VALUE (?,?,?,?,?,?,?)`
-				let Params = [result[0].paintingId+1,data.canv, users[0],users[1],users[2],users[3],users[4]]
+				let Params = [result[0].paintingId+1,data.canv, data.users[0],data.users[1],data.users[2],data.users[3],data.users[4]]
 				connection.query(sql, Params, (err,result)=> {
 					if(err) {
 						console.log(err)
