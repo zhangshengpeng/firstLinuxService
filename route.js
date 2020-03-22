@@ -120,7 +120,17 @@ exports.saveCanv = (data)=> {
 		let sql = `UPDATE painting SET base64 = ? WHERE paintingId = '${data.paintingId}'`
 		connection.query(sql,data.canv,(err,result)=>{
 			if (err) { console.log(err) }
-			else console.log(result)
+			else {
+				let sql = `INSERT INTO painting (paintingId, base64) VALUE (?,?)`
+				let Params = [data.paintingId,data.canv]
+				connection.query(sql, Params, (err,result)=> {
+					if(err) {
+						console.log(err)
+					} else {
+						console.log(result)
+					}
+				})
+			}
 		})
 	} else {
 		let sql = `SELECT * FROM painting order by paintingId desc limit 1`
@@ -129,6 +139,15 @@ exports.saveCanv = (data)=> {
 				console.log(err)
 			} else {
 				console.log(result[0].paintingId)
+				let sql = `INSERT INTO painting (paintingId, base64, user1, user2, user3, user4, user5) VALUE (?,?,?,?,?,?,?)`
+				let Params = [result[0].paintingId+1,data.canv, users[0],users[1],users[2],users[3],users[4]]
+				connection.query(sql, Params, (err,result)=> {
+					if(err) {
+						console.log(err)
+					} else {
+						console.log(result)
+					}
+				})
 			}
 		})
 	}
