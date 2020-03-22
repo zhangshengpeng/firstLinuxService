@@ -185,6 +185,11 @@ socketio.getSocketio = (server)=>{
         socket.on('RoomInit',(data)=>{
           io.to(arrAllSocket[data.userId]).emit('RoomInit',canvs[data.houseId].toDataURL('image/png'));
         })
+        socket.on('saveCanv', (data)=>{
+          data.canv = canvs[data.houseId].toDataURL('image/png')
+          console.log(data.canvs)
+          Router.saveCanv(data)
+        })
         //敲砖块
         socket.on('brick', (data)=>{
           // console.log(data)
