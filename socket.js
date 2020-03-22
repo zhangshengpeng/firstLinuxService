@@ -189,11 +189,12 @@ socketio.getSocketio = (server)=>{
           io.to(arrAllSocket[data.userId]).emit('RoomInit',canvs[data.houseId].toDataURL('image/png'));
         })
 //保存画布
-        socket.on('saveCanv',async (data)=>{
+        socket.on('saveCanv',(data)=>{
           data.canv = canvs[data.houseId].toDataURL('image/png')
           
-          let res =  await Router.saveCanv(data)
-          console.log("保存结果", res)
+          Router.saveCanv(data).than((data)=>{
+            console.log("保存结果", res)
+          })
         })
         //敲砖块
         socket.on('brick', (data)=>{

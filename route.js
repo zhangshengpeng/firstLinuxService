@@ -115,7 +115,7 @@ exports.saveMsg = (str)=> {
 			}
 		})
 }
-exports.saveCanv = (data)=> { 
+exports.saveCanv = async (data)=> {
 	if(data.paintingId >0) {
 		let sql = `UPDATE painting SET base64 = ? WHERE paintingId = '${data.paintingId}'`
 		connection.query(sql,data.canv,(err,result)=>{
@@ -123,7 +123,7 @@ exports.saveCanv = (data)=> {
 			else {
 				let sql = `INSERT INTO painting (paintingId, base64) VALUE (?,?)`
 				let Params = [data.paintingId,data.canv]
-				connection.query(sql, Params, (err,result)=> {
+				await connection.query(sql, Params, (err,result)=> {
 					if(err) {
 						console.log(err)
 					} else {
@@ -136,7 +136,7 @@ exports.saveCanv = (data)=> {
 		})
 	} else {
 		let sql = `SELECT * FROM painting order by paintingId desc limit 1`
-		connection.query(sql,(err, result)=> {
+		await connection.query(sql,(err, result)=> {
 			if(err) {
 				console.log(err)
 			} else {
