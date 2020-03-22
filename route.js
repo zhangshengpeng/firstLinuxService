@@ -128,7 +128,7 @@ exports.saveCanv = (data)=> {
 			if(err) {
 				console.log(err)
 			} else {
-				console.log(result[0].id)
+				console.log(result[0].paintingId)
 			}
 		})
 	}
